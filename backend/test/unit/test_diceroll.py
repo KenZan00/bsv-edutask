@@ -2,7 +2,7 @@ import pytest
 from unittest.mock import patch
 from src.util.helpers import diceroll
 
-@pytest.mark.dice
+@pytest.mark.unit
 @pytest.mark.parametrize('num, expected', [
     (3, False),
     (4, False),
