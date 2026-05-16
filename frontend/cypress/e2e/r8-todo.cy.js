@@ -158,7 +158,6 @@ describe('R8 - Todo list manipulation', () => {
         //tried it myself aswell and the first time i tried to delete an item i had to click twice, then it worked with one
         .click()
 
-
     //Verify that it got removed
     cy.get('.todo-item')
         .should('have.length', 0)
