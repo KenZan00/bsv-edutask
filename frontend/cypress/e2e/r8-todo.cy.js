@@ -67,7 +67,6 @@ describe('R8 - Todo list manipulation', () => {
     cy.get('input[value="Add"]')
         .click()
 
-
     cy.contains(task.todos)
         .should('exist')
 
@@ -99,18 +98,22 @@ describe('R8 - Todo list manipulation', () => {
   //Checks the todo list, and makes it "watched"
   it('R8UC2: The user "completes" a todo', () => {
     cy.get('.todo-item')
-        .first()
-        .find('.checker.unchecked')
-        .click()
+      .first()
+      .find('.checker.unchecked')
+      .click()
 
-
+    // Find todo-item and check if its checked.
     cy.get('.todo-item')
-        .first()
-        .find('.checker.checked')
-        .should('exist')
+      .first()
+      .find('.checker.checked')
+      .should('exist')
+    
+    //Then see if the task text struck through as stated in end-condition.
+    cy.get('.todo-item')
+      .first()
+      .find('.editable')
+      .should('have.css', 'text-decoration-line', 'line-through')
   })
-
-
 
 
   //The alternative test case
@@ -118,30 +121,25 @@ describe('R8 - Todo list manipulation', () => {
 
 
   it('R8UC2 alternative 2: The user "completes" a todo', () => {
-    //first clikc on the item to make it "checked"
+    // First clikc on the item to make it "checked".
     cy.get('.todo-item')
         .first()
         .find('.checker.unchecked')
         .click()
 
-    //Then see if the task text struck through as stated in end-condition.
-    cy.get('.todo-item')
-        .find('.editable')
-        .should('have.css', 'text-decoration-line', 'line-through')
-
-    //Then find the checked item (the one that we used clicked) and click it bak to normal
+    // Find the checked item (the one that we used clicked) and click it back to normal.
     cy.get('.todo-item')
         .first()
         .find('.checker.checked')
         .click()
 
-    //Now see if its backed to unchecked
+    // Now see if its backed to unchecked.
     cy.get('.todo-item')
         .first()
         .find('.checker.unchecked')
         .should('exist')
 
-    //Test if the text is back to normal (not struck)
+    // Test if the text is back to normal (not struck).
     cy.get('.todo-item')
         .find('.editable')
         .should('have.css', 'text-decoration-line', 'none')
@@ -159,7 +157,6 @@ describe('R8 - Todo list manipulation', () => {
         //(Needed another click since it didnt seem to "register" on the first one sometimes)
         //tried it myself aswell and the first time i tried to delete an item i had to click twice, then it worked with one
         .click()
-
 
     //Verify that it got removed
     cy.get('.todo-item')
