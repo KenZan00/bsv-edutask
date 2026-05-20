@@ -3,7 +3,6 @@ from unittest.mock import MagicMock
 from unittest.mock import patch
 from src.util.dao import DAO
 from pymongo.errors import WriteError
-from pymongo.errors import DuplicateKeyError
 
 
 validation_structure = { "$jsonSchema": {
