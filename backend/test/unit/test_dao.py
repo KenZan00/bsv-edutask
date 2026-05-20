@@ -90,7 +90,8 @@ def test_create_document_wrong_datatype(db_sut):
     with pytest.raises(WriteError):
         db_sut.create(document)
 
-# Testing duplciate unique item, which should raise an exception
+# Testing duplciate unique item, which should raise an exception according to the documentation of dao.py -> create() method
+# The test will fail, that is not how validation work in MongoDB, this test is tho show a defiency in the cods documentation and implementation.
 @pytest.mark.integration
 def test_create_document_unique_item_constraint(db_sut):
     
@@ -102,14 +103,10 @@ def test_create_document_unique_item_constraint(db_sut):
 
     db_sut.create(document)
     
-    with pytest.raises(DuplicateKeyError):
+    with pytest.raises(WriteError):
         db_sut.create(document)
 
 
 
-
-
-# @pytest.mark.integration
-# def test_create_document_empty(db_sut):
-#     with pytest.raises(Exception):
-#         db_sut.create({})
+# Removed options and empty document as it would either trigger the same WriteError på validation or
+# get validated and inputed per option if other requirements are still in place.
